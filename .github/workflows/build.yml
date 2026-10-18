@@ -30,8 +30,14 @@ jobs:
       - name: Install Dependencies
         run: flutter pub get
 
-      - name: Create Android Platform Files
-        run: flutter create . --platforms=android --org com.example.smsapp
+      - name: Fix Kotlin JVM Target Inconsistency
+        run: |
+          mkdir -p android/app
+          if [ ! -f android/app/build.gradle ]; then
+            flutter create . --platforms=android
+          fi
+          echo "" >> android/app/build.gradle
+          echo "android { compileOptions { sourceCompatibility JavaVersion.VERSION_17 targetCompatibility JavaVersion.VERSION_17 } kotlinOptions { jvmTarget = '17' } }" >> android/app/build.gradle
 
       - name: Build APK
         run: flutter build apk --release
