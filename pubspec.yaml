@@ -1,0 +1,23 @@
+name: sms_campaign
+description: تطبيق حملات رسائل SMS مجدولة للعملاء
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.9.0
+  flutter: '>=3.35.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  telephony_sms: ^0.1.0          # إرسال SMS فعلي من الشريحة (يتطلب SDK 24+ و Flutter 3.35+)
+  permission_handler: ^12.0.1    # فتح إعدادات التطبيق عند رفض الصلاحية
+  file_picker: ^10.0.0           # اختيار ملف Excel / CSV
+  excel: ^4.0.6                  # قراءة ملفات xlsx
+  shared_preferences: ^2.3.0     # حفظ حالة الحملة لاستئنافها
+  wakelock_plus: ^1.3.0          # إبقاء الشاشة مضاءة أثناء الحملة
+
+flutter:
+  uses-material-design: true
