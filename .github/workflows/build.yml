@@ -30,6 +30,11 @@ jobs:
       - name: Install Dependencies
         run: flutter pub get
 
+      - name: Fix Gradle JVM Compatibility
+        run: |
+          mkdir -p android/app
+          echo "android { compileOptions { sourceCompatibility JavaVersion.VERSION_17 targetCompatibility JavaVersion.VERSION_17 } kotlinOptions { jvmTarget = '17' } }" >> android/app/build.gradle || true
+
       - name: Build APK
         run: flutter build apk --release
 
