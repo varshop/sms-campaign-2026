@@ -27,15 +27,16 @@ jobs:
           channel: 'stable'
           cache: true
 
-      - name: Refresh Android Project Structure
+      - name: Clean & Recreate Android Environment
         run: |
+          flutter clean
           rm -rf android
           flutter create . --platforms=android --org com.example.smsapp
 
       - name: Install Dependencies
         run: flutter pub get
 
-      - name: Build APK
+      - name: Build APK Release
         run: flutter build apk --release
 
       - name: Upload APK Artifact
