@@ -15,27 +15,17 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Set up Java
+      - name: Set up Java (Java 11 for Compatibility)
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '11'
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
           cache: true
-
-      - name: Clean & Recreate Android Environment
-        run: |
-          flutter clean
-          rm -rf android
-          flutter create . --platforms=android --org com.example.smsapp
-
-      - name: Bypass JVM Target Mismatch Check
-        run: |
-          echo "kotlin.jvm.target.validation.mode=ignore" >> android/gradle.properties
 
       - name: Install Dependencies
         run: flutter pub get
