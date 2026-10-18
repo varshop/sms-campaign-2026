@@ -33,24 +33,6 @@ jobs:
           rm -rf android
           flutter create . --platforms=android --org com.example.smsapp
 
-      - name: Fix Kotlin JVM Target Compatibility
-        run: |
-          echo "subprojects {
-              afterEvaluate { project ->
-                  if (project.hasProperty('android')) {
-                      project.android {
-                          if (namespace == null) {
-                              namespace project.group
-                          }
-                          compileOptions {
-                              sourceCompatibility JavaVersion.VERSION_17
-                              targetCompatibility JavaVersion.VERSION_17
-                          }
-                      }
-                  }
-              }
-          }" >> android/build.gradle
-
       - name: Install Dependencies
         run: flutter pub get
 
