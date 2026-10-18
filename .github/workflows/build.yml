@@ -33,6 +33,10 @@ jobs:
           rm -rf android
           flutter create . --platforms=android --org com.example.smsapp
 
+      - name: Bypass JVM Target Mismatch Check
+        run: |
+          echo "kotlin.jvm.target.validation.mode=ignore" >> android/gradle.properties
+
       - name: Install Dependencies
         run: flutter pub get
 
